@@ -1,0 +1,86 @@
+[
+  {
+    "owner": "a", 
+    "ip": "127.0.0.1", 
+    "cmd": "python", 
+    "port": 12346, 
+    "argv": "python"
+  }, 
+  {
+    "owner": "root", 
+    "ip": "127.0.0.1", 
+    "cmd": "/sbin/rpcbind", 
+    "port": 111, 
+    "argv": "/sbin/rpcbind -w"
+  }, 
+  {
+    "owner": "a", 
+    "ip": "127.0.0.1", 
+    "cmd": "nc", 
+    "port": 9192, 
+    "argv": "nc -l -p 9192 -vvv"
+  }, 
+  {
+    "owner": "root", 
+    "ip": "127.0.0.1", 
+    "cmd": "/usr/sbin/smbd", 
+    "port": 445, 
+    "argv": "/usr/sbin/smbd -D"
+  }, 
+  {
+    "owner": "root", 
+    "ip": "127.0.0.1", 
+    "cmd": "/usr/sbin/sshd", 
+    "port": 22, 
+    "argv": "/usr/sbin/sshd -D"
+  }, 
+  {
+    "owner": "root", 
+    "ip": "127.0.0.1", 
+    "cmd": "/usr/sbin/smbd", 
+    "port": 139, 
+    "argv": "/usr/sbin/smbd -D"
+  }, 
+  {
+    "owner": "postgresql", 
+    "ip": "127.0.0.1", 
+    "cmd": "/opt/svcviz/postgresql-9.6.3/bin/postgres", 
+    "port": 5432, 
+    "argv": "/opt/svcviz/postgresql-9.6.3/bin/postgres -D /opt/svcviz/postgresql/data"
+  }, 
+  {
+    "owner": "Debian-exim", 
+    "ip": "127.0.0.1", 
+    "cmd": "/usr/sbin/exim4", 
+    "port": 25, 
+    "argv": "/usr/sbin/exim4 -bd -q30m"
+  }, 
+  {
+    "owner": "a", 
+    "ip": "127.0.0.1", 
+    "cmd": "python", 
+    "port": 12345, 
+    "argv": "python"
+  }, 
+  {
+    "owner": "a", 
+    "ip": "127.0.0.1", 
+    "cmd": "nc", 
+    "port": 9142, 
+    "argv": "nc -l -p 9142 -vvv"
+  }, 
+  {
+    "owner": "a", 
+    "ip": "127.0.0.1", 
+    "cmd": "nc", 
+    "port": 9191, 
+    "argv": "nc -l -p 9191 -vvv"
+  }, 
+  {
+    "owner": "ntop", 
+    "ip": "127.0.0.1", 
+    "cmd": "/usr/sbin/ntop", 
+    "port": 3000, 
+    "argv": "/usr/sbin/ntop -d -L -u ntop -P /var/lib/ntop --access-log-file /var/log/ntop/access.log -i eth0 -p /etc/ntop/protocol.list -O /var/log/ntop"
+  }
+]

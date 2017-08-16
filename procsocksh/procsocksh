@@ -1,0 +1,45 @@
+#!/bin/bash
+INFILE=iplist.txt
+SOURCE_HOST=$(/bin/hostname)
+DATE=$(/bin/date +%Y%m%d%H%M)
+OUTDIR="${SOURCE_HOST}_${DATE}"
+
+CONNECTION_TIMEOUT=5
+CONNECTION_ATTEMPTS=2
+
+mkdir -p "${OUTDIR}" || exit
+
+LSOF_CMD="PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin/:/usr/local/sbin lsof +c 0 -i4 -P -n -Fn -Fp -FT -F0"
+PS_CMD="PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin/:/usr/local/sbin ps -e -o pid= -o user= -o comm= -o args="
+
+for IP in $(/bin/egrep -e '^[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}$' "${INFILE}")
+do
+	echo "-- ${IP}"
+	LSOF_OUT="${OUTDIR}/${IP}.${DATE}.lsof"
+	PS_OUT="${OUTDIR}/${IP}.${DATE}.ps"
+	RET_ERR_OUT="${OUTDIR}/${IP}.${DATE}.ret.error"
+	PS_ERR_OUT="${OUTDIR}/${IP}.${DATE}.ps.error"
+	LSOF_ERR_OUT="${OUTDIR}/${IP}.${DATE}.lsof.error"
+	RET_SUCCESS_OUT="${OUTDIR}/${IP}.${DATE}.ret.complete"
+	echo "ps on ${IP}..."
+        # GSSAPIAuthentication=no
+	ssh -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${PS_CMD}" 2>>"${PS_ERR_OUT}" 1>"${PS_OUT}"
+    	o=$?
+	if [ $o -ne 0 ]; then
+		echo "$o:${IP}" >> "${RET_ERR_OUT}"
+		echo "SSH returned error trying ps on ${IP}, skipping lsof"
+		continue
+	else
+		echo "lsof on ${IP}..."
+                # GSSAPIAuthentication=no
+		ssh -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${LSOF_CMD}" 2>>"${LSOF_ERR_OUT}" 1>"${LSOF_OUT}"
+		o=$?
+		if [ $o -ne 0 ]; then
+			echo "$o:${IP}" >> "${RET_ERR_OUT}"
+			echo "SSH returned error trying lsof on ${IP}"
+		else
+		    	touch "${RET_SUCCESS_OUT}"
+		fi
+	fi
+
+done

@@ -1,0 +1,214 @@
+     1 root     systemd         /sbin/init
+     2 root     kthreadd        [kthreadd]
+     3 root     ksoftirqd/0     [ksoftirqd/0]
+     5 root     kworker/0:0H    [kworker/0:0H]
+     7 root     rcu_sched       [rcu_sched]
+     8 root     rcu_bh          [rcu_bh]
+     9 root     migration/0     [migration/0]
+    10 root     watchdog/0      [watchdog/0]
+    11 root     watchdog/1      [watchdog/1]
+    12 root     migration/1     [migration/1]
+    13 root     ksoftirqd/1     [ksoftirqd/1]
+    15 root     kworker/1:0H    [kworker/1:0H]
+    16 root     watchdog/2      [watchdog/2]
+    17 root     migration/2     [migration/2]
+    18 root     ksoftirqd/2     [ksoftirqd/2]
+    20 root     kworker/2:0H    [kworker/2:0H]
+    21 root     watchdog/3      [watchdog/3]
+    22 root     migration/3     [migration/3]
+    23 root     ksoftirqd/3     [ksoftirqd/3]
+    25 root     kworker/3:0H    [kworker/3:0H]
+    26 root     khelper         [khelper]
+    27 root     kdevtmpfs       [kdevtmpfs]
+    28 root     netns           [netns]
+    29 root     khungtaskd      [khungtaskd]
+    30 root     writeback       [writeback]
+    31 root     ksmd            [ksmd]
+    32 root     khugepaged      [khugepaged]
+    33 root     crypto          [crypto]
+    34 root     kintegrityd     [kintegrityd]
+    35 root     bioset          [bioset]
+    36 root     kblockd         [kblockd]
+    40 root     kswapd0         [kswapd0]
+    41 root     vmstat          [vmstat]
+    42 root     fsnotify_mark   [fsnotify_mark]
+    48 root     kthrotld        [kthrotld]
+    50 root     ipv6_addrconf   [ipv6_addrconf]
+    51 root     deferwq         [deferwq]
+    91 root     khubd           [khubd]
+    92 root     kpsmoused       [kpsmoused]
+    94 root     ata_sff         [ata_sff]
+    96 root     scsi_eh_0       [scsi_eh_0]
+    97 root     scsi_tmf_0      [scsi_tmf_0]
+    98 root     scsi_eh_1       [scsi_eh_1]
+    99 root     scsi_tmf_1      [scsi_tmf_1]
+   101 root     mpt_poll_0      [mpt_poll_0]
+   103 root     mpt/0           [mpt/0]
+   104 root     scsi_eh_2       [scsi_eh_2]
+   105 root     scsi_tmf_2      [scsi_tmf_2]
+   109 root     kworker/1:1H    [kworker/1:1H]
+   112 root     kworker/0:1H    [kworker/0:1H]
+   113 root     kworker/3:1H    [kworker/3:1H]
+   131 root     kworker/2:1H    [kworker/2:1H]
+   143 root     jbd2/sda1-8     [jbd2/sda1-8]
+   144 root     ext4-rsv-conver [ext4-rsv-conver]
+   177 root     kauditd         [kauditd]
+   183 root     systemd-journal /lib/systemd/systemd-journald
+   190 root     systemd-udevd   /lib/systemd/systemd-udevd
+   230 root     ttm_swap        [ttm_swap]
+   353 root     auditd          /sbin/auditd -n
+   488 root     vmtoolsd        /usr/bin/vmtoolsd
+   495 root     cron            /usr/sbin/cron -f
+   496 avahi    avahi-daemon    avahi-daemon: running [debian.local]
+   497 root     sshd            /usr/sbin/sshd -D
+   498 root     NetworkManager  /usr/sbin/NetworkManager --no-daemon
+   499 root     ModemManager    /usr/sbin/ModemManager
+   501 daemon   atd             /usr/sbin/atd -f
+   502 root     rsyslogd        /usr/sbin/rsyslogd -n
+   504 message+ dbus-daemon     /usr/bin/dbus-daemon --system --address=systemd: --nofork --nopidfile --systemd-activation
+   507 avahi    avahi-daemon    avahi-daemon: chroot helper
+   513 root     systemd-logind  /lib/systemd/systemd-logind
+   520 root     acpid           /usr/sbin/acpid
+   529 root     agetty          /sbin/agetty --noclear tty1 linux
+   537 root     lightdm         /usr/sbin/lightdm
+   539 root     polkitd         /usr/lib/policykit-1/polkitd --no-debug
+   562 root     cfg80211        [cfg80211]
+   565 root     Xorg            /usr/bin/X :0 -seat seat0 -auth /var/run/lightdm/root/:0 -nolisten tcp vt7 -novtswitch
+   723 lightdm  systemd         /lib/systemd/systemd --user
+   735 lightdm  (sd-pam)        (sd-pam)  
+   771 lightdm  dbus-launch     /usr/bin/dbus-launch --autolaunch a3c9c725ec864dc182c26f3c5849d23c --binary-syntax --close-stderr
+   772 lightdm  dbus-daemon     /usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+   774 lightdm  at-spi-bus-laun /usr/lib/at-spi2-core/at-spi-bus-launcher
+   779 lightdm  dbus-daemon     /usr/bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+   782 lightdm  at-spi2-registr /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+   931 root     rpcbind         /sbin/rpcbind -w
+  1213 root     apache2         /usr/sbin/apache2 -k start
+  1225 ntop     ntop            /usr/sbin/ntop -d -L -u ntop -P /var/lib/ntop --access-log-file /var/log/ntop/access.log -i eth0 -p /etc/ntop/protocol.list -O /var/log/ntop
+  1248 root     nmbd            /usr/sbin/nmbd -D
+  1255 Debian-+ exim4           /usr/sbin/exim4 -bd -q30m
+  1262 root     smbd            /usr/sbin/smbd -D
+  1264 root     smbd            /usr/sbin/smbd -D
+  1275 root     lightdm         lightdm --session-child 13 22
+  1280 a        systemd         /lib/systemd/systemd --user
+  1281 a        (sd-pam)        (sd-pam)  
+  1287 a        sh              /bin/sh /etc/xdg/xfce4/xinitrc -- /etc/X11/xinit/xserverrc
+  1313 a        ssh-agent       /usr/bin/ssh-agent /usr/bin/dbus-launch --exit-with-session x-session-manager
+  1316 a        dbus-launch     /usr/bin/dbus-launch --exit-with-session x-session-manager
+  1317 a        dbus-daemon     /usr/bin/dbus-daemon --fork --print-pid 5 --print-address 7 --session
+  1327 a        xfce4-session   xfce4-session
+  1330 a        xfconfd         /usr/lib/x86_64-linux-gnu/xfce4/xfconf/xfconfd
+  1334 a        gpg-agent       /usr/bin/gpg-agent --sh --daemon --write-env-file /home/a/.cache/gpg-agent-info
+  1335 a        xfwm4           xfwm4 --display :0.0 --sm-client-id 27452ec1f-31fc-4192-8387-6198b91cc87f
+  1337 a        Thunar          Thunar --sm-client-id 2d5c84d9d-b1d9-4e3f-af6d-50a83b9dd148 --daemon
+  1338 a        xfce4-panel     xfce4-panel --display :0.0 --sm-client-id 2fc7e4eb1-2771-4070-b2d2-ac131c6bb6cd
+  1340 a        xfdesktop       xfdesktop --display :0.0 --sm-client-id 261bb9c7a-5d40-4696-9944-aa2b7cfa8348
+  1341 a        xfsettingsd     xfsettingsd --display :0.0 --sm-client-id 2a27a5be1-6294-4da3-ae06-92426039cb56
+  1343 a        xfce4-power-man xfce4-power-manager --restart --sm-client-id 25492dadc-ef10-4e2f-ae1a-e675394b0536
+  1348 a        xfce4-power-man xfce4-power-manager
+  1351 a        gvfsd           /usr/lib/gvfs/gvfsd
+  1359 a        xfce4-volumed   xfce4-volumed
+  1363 a        panel-6-systray /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper /usr/lib/x86_64-linux-gnu/xfce4/panel/plugins/libsystray.so 6 23068711 systray Notification Area Area where notification icons appear 
+  1364 a        nm-applet       nm-applet
+  1366 a        at-spi-bus-laun /usr/lib/at-spi2-core/at-spi-bus-launcher
+  1368 a        panel-2-actions /usr/lib/x86_64-linux-gnu/xfce4/panel/wrapper /usr/lib/x86_64-linux-gnu/xfce4/panel/plugins/libactions.so 2 23068712 actions Action Buttons Log out, lock or other system actions 
+  1372 a        dbus-daemon     /usr/bin/dbus-daemon --config-file=/etc/at-spi2/accessibility.conf --nofork --print-address 3
+  1375 a        applet.py       /usr/bin/python /usr/share/system-config-printer/applet.py
+  1377 a        polkit-gnome-au /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+  1379 a        at-spi2-registr /usr/lib/at-spi2-core/at-spi2-registryd --use-gnome-session
+  1386 a        xscreensaver    xscreensaver -no-splash
+  1389 a        pulseaudio      /usr/bin/pulseaudio --start --log-target=syslog
+  1390 rtkit    rtkit-daemon    /usr/lib/rtkit/rtkit-daemon
+  1396 a        gconfd-2        /usr/lib/x86_64-linux-gnu/gconf/gconfd-2
+  1415 root     upowerd         /usr/lib/upower/upowerd
+  1439 a        gvfs-udisks2-vo /usr/lib/gvfs/gvfs-udisks2-volume-monitor
+  1441 root     udisksd         /usr/lib/udisks2/udisksd --no-debug
+  1455 a        gvfsd-trash     /usr/lib/gvfs/gvfsd-trash --spawner :1.10 /org/gtk/gvfs/exec_spaw/0
+  1471 a        xfce4-terminal  xfce4-terminal
+  1475 a        gnome-pty-helpe gnome-pty-helper
+  1476 a        bash            bash
+  1496 root     bluetoothd      /usr/lib/bluetooth/bluetoothd
+  1571 a        wbar            wbar
+  2679 a        chromium        /usr/lib/chromium/chromium
+  2684 a        chrome-sandbox  /usr/lib/chromium/chrome-sandbox /usr/lib/chromium/chromium --type=zygote
+  2685 a        chromium        /usr/lib/chromium/chromium --type=zygote
+  2687 a        chromium        /usr/lib/chromium/chromium --type=zygote
+  2755 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=7A930A1C4FC2D4B26671F9DD9CAAE822 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=7A930A1C4FC2D4B26671F9DD9CAAE822 --renderer-client-id=4 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  2802 a        chromium        /usr/lib/chromium/chromium --type=gpu-process --field-trial-handle=1 --supports-dual-gpus=false --gpu-driver-bug-workarounds=7,8,10,23,28,33,74 --disable-gl-extensions=GL_KHR_blend_equation_advanced GL_KHR_blend_equation_advanced_coherent --disable-webrtc-hw-encoding --gpu-vendor-id=0x15ad --gpu-device-id=0x0405 --gpu-driver-vendor=Mesa --gpu-driver-version=10.3.2 --gpu-driver-date --service-request-channel-token=2455733E7C930C7B139ADED7E09E0262 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  4293 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=04063D0BAAB68D162307BCBA138DB472 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=04063D0BAAB68D162307BCBA138DB472 --renderer-client-id=17 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  8024 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=9A3A4AF805D2A4359C3DECDC39BDAF8C --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=9A3A4AF805D2A4359C3DECDC39BDAF8C --renderer-client-id=431 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  8272 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=17370EF9531B43A20ED19FDD4A8BBC2D --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=17370EF9531B43A20ED19FDD4A8BBC2D --renderer-client-id=438 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  8577 root     psql            psql -U postgresql svcviz
+  8578 postgre+ postgres        postgres: postgresql svcviz [local] idle                                
+  8593 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=F087C8EADE53832C078E981C807EB600 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=F087C8EADE53832C078E981C807EB600 --renderer-client-id=439 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  8876 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=9AFA92B9811DC4AC517D4853B4BBB903 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=9AFA92B9811DC4AC517D4853B4BBB903 --renderer-client-id=440 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  9518 a        bash            bash
+  9686 root     kworker/u256:0  [kworker/u256:0]
+  9747 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=35EA1F0FDF518A41B100631E38687409 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=35EA1F0FDF518A41B100631E38687409 --renderer-client-id=441 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+  9842 root     packagekitd     /usr/lib/packagekit/packagekitd
+ 14082 root     kworker/u256:2  [kworker/u256:2]
+ 16596 www-data apache2         /usr/sbin/apache2 -k start
+ 16597 www-data apache2         /usr/sbin/apache2 -k start
+ 16598 www-data apache2         /usr/sbin/apache2 -k start
+ 16599 www-data apache2         /usr/sbin/apache2 -k start
+ 16602 www-data apache2         /usr/sbin/apache2 -k start
+ 17713 root     kworker/0:1     [kworker/0:1]
+ 17791 root     kworker/3:1     [kworker/3:1]
+ 18350 a        python          python -B /home/a/.config/sublime-text-3/Packages/Anaconda/anaconda_server/jsonserver.py -p TAU -e /home/a/TAU 96661
+ 18440 root     kworker/0:0     [kworker/0:0]
+ 21400 root     kworker/1:2     [kworker/1:2]
+ 22804 root     kworker/2:1     [kworker/2:1]
+ 24483 a        bash            bash
+ 24488 a        nc              nc -l -p 9191 -vvv
+ 24489 a        nc              nc -l -p 9192 -vvv
+ 24490 a        nc              nc -l -p 9142 -vvv
+ 24714 root     kworker/1:0     [kworker/1:0]
+ 25406 root     kworker/2:2     [kworker/2:2]
+ 25509 root     kworker/3:2     [kworker/3:2]
+ 25632 root     kworker/3:0     [kworker/3:0]
+ 25704 a        python          python
+ 25722 root     sudo            sudo -i
+ 25723 root     bash            -bash
+ 25730 root     ps              ps -e -o pid= -o user= -o comm= -o args=
+ 75000 root     kworker/u257:0  [kworker/u257:0]
+ 75001 root     hci0            [hci0]
+ 75002 root     hci0            [hci0]
+ 75009 root     kworker/u257:1  [kworker/u257:1]
+ 75272 root     sudo            sudo -i
+ 75273 root     bash            -bash
+ 75846 a        gnome-terminal- /usr/lib/gnome-terminal/gnome-terminal-server
+ 75849 a        gnome-pty-helpe gnome-pty-helper
+ 75850 a        bash            bash
+ 94710 root     sudo            sudo -i
+ 94711 root     bash            -bash
+ 94827 root     sudo            sudo -i
+ 94828 root     bash            -bash
+ 94981 postgre+ postgres        /opt/svcviz/postgresql-9.6.3/bin/postgres -D /opt/svcviz/postgresql/data
+ 94983 postgre+ postgres        postgres: checkpointer process                                          
+ 94984 postgre+ postgres        postgres: writer process                                                
+ 94985 postgre+ postgres        postgres: wal writer process                                            
+ 94986 postgre+ postgres        postgres: autovacuum launcher process                                   
+ 94987 postgre+ postgres        postgres: stats collector process                                       
+ 95365 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=B93398D8FB9442A36DE8335795C3C3DA --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=B93398D8FB9442A36DE8335795C3C3DA --renderer-client-id=274 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 95747 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=B2A10E3FF9BE584BAE019EC167DA6345 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=B2A10E3FF9BE584BAE019EC167DA6345 --renderer-client-id=280 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 95829 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=C46DF41D44F9BBA83B09BEC60252739F --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=C46DF41D44F9BBA83B09BEC60252739F --renderer-client-id=285 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 95856 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=F8C928B03C98446772AA1F2A221E16B9 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=F8C928B03C98446772AA1F2A221E16B9 --renderer-client-id=287 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 95927 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=0B55823E63D0A343D23B649C673F1857 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=0B55823E63D0A343D23B649C673F1857 --renderer-client-id=290 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 96195 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=F6B9EA89D6B86E418439676F1BA81CBF --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=F6B9EA89D6B86E418439676F1BA81CBF --renderer-client-id=296 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 96356 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=664D0E603A5EE763E6B6A61B523B43A6 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=664D0E603A5EE763E6B6A61B523B43A6 --renderer-client-id=301 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+ 96651 a        sublime_text    /opt/sublime_text_3/sublime_text
+ 96661 a        plugin_host     /opt/sublime_text_3/plugin_host 96651
+ 96715 a        python          python -B /home/a/.config/sublime-text-3/Packages/Anaconda/anaconda_server/jsonserver.py -p svcviz -e /home/a/svcviz 96661
+102623 a        bash            bash
+111772 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=A6BDFE87D6AEAEE8798F6EE103296D1B --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=A6BDFE87D6AEAEE8798F6EE103296D1B --renderer-client-id=355 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+112355 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=D801C517E77DC747BB7D4FF669433E92 --lang=en-US --extension-process --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=D801C517E77DC747BB7D4FF669433E92 --renderer-client-id=369 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+112371 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=992DFE5399559BCE7F3C8C72DA855155 --lang=en-US --extension-process --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=992DFE5399559BCE7F3C8C72DA855155 --renderer-client-id=371 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+112405 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=6D9A15497A323AFCD82AE2BBEDAC6BB5 --lang=en-US --extension-process --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=6D9A15497A323AFCD82AE2BBEDAC6BB5 --renderer-client-id=375 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+112421 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=60F95D40F15D35084096505E08951365 --lang=en-US --extension-process --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=60F95D40F15D35084096505E08951365 --renderer-client-id=377 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+113147 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=EE64339E6FD6584CF27782227F281096 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=EE64339E6FD6584CF27782227F281096 --renderer-client-id=380 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+114034 a        bash            bash
+114322 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=3E91C1A1749EF1ADBE3182D56EC06D5B --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=3E91C1A1749EF1ADBE3182D56EC06D5B --renderer-client-id=383 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+121185 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=36E27728757AADC134D7875BC244F7D9 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=36E27728757AADC134D7875BC244F7D9 --renderer-client-id=403 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+121225 a        chromium        /usr/lib/chromium/chromium --type=renderer --field-trial-handle=1 --primordial-pipe-token=80B25E7F9BA2982464ACC394FCD124B6 --lang=en-US --enable-offline-auto-reload --enable-offline-auto-reload-visible-only --enable-pinch --num-raster-threads=2 --enable-main-frame-before-activation --content-image-texture-target=0,0,3553;0,1,3553;0,2,3553;0,3,3553;0,4,3553;0,5,3553;0,6,3553;0,7,3553;0,8,3553;0,9,3553;0,10,3553;0,11,3553;0,12,3553;0,13,3553;0,14,3553;0,15,3553;1,0,3553;1,1,3553;1,2,3553;1,3,3553;1,4,3553;1,5,3553;1,6,3553;1,7,3553;1,8,3553;1,9,3553;1,10,3553;1,11,3553;1,12,3553;1,13,3553;1,14,3553;1,15,3553;2,0,3553;2,1,3553;2,2,3553;2,3,3553;2,4,3553;2,5,3553;2,6,3553;2,7,3553;2,8,3553;2,9,3553;2,10,3553;2,11,3553;2,12,3553;2,13,3553;2,14,3553;2,15,3553;3,0,3553;3,1,3553;3,2,3553;3,3,3553;3,4,3553;3,5,3553;3,6,3553;3,7,3553;3,8,3553;3,9,3553;3,10,3553;3,11,3553;3,12,3553;3,13,3553;3,14,3553;3,15,3553 --disable-accelerated-video-decode --disable-webrtc-hw-vp8-encoding --disable-gpu-compositing --service-request-channel-token=80B25E7F9BA2982464ACC394FCD124B6 --renderer-client-id=404 --v8-natives-passed-by-fd --v8-snapshot-passed-by-fd
+125449 a        bash            bash
+127427 root     dhclient        /sbin/dhclient -d -q -sf /usr/lib/NetworkManager/nm-dhcp-helper -pf /var/run/dhclient-eth0.pid -lf /var/lib/NetworkManager/dhclient-497fb111-758d-447c-91c2-6be5c62e067b-eth0.lease -cf /var/lib/NetworkManager/dhclient-eth0.conf eth0
+129249 a        bash            bash

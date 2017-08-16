@@ -1,0 +1,119 @@
+#!/usr/bin/env python
+"""
+    procsock - a tool for parsing and processing lsof and ps data from a large
+    collection UNIX based systems
+
+    Take output from ps and lsof and join it. Dump a JSON file that contains
+    data like this:
+
+    [
+    ...
+    {
+        "args": "python",
+        "ip": "127.0.0.1",
+        "name": "python",
+        "port": 12346,
+        "runs_as": "a"
+    },
+    {
+        "args": "/sbin/rpcbind",
+        "ip": "127.0.0.1",
+        "name": "/sbin/rpcbind",
+        "port": 111,
+        "runs_as": "root"
+    },
+    ...
+
+    Used for making an inventory of listening ports on a network, especially
+    to augment port scanning data
+
+    The data should be collected using procsocksh
+
+    Licensed under GPLv2 by copyright@mpzpqnxow.com
+"""
+
+from json import dump as dump_json
+import sys
+from argparse import ArgumentParser
+from collections import Counter
+from proclib import LSOF, PS, join_network_socket_procdata
+
+
+def write_socket_procdata(merged, outfile='output.json', stats=True):
+    """
+        Iterate over the joined proc data, writing certain fields out only when
+        the process has a listening port on an external interface, i.e. not
+        loopback
+    """
+    listening_procs = []
+    hosts = set()
+    procnames = list()
+    for key, proc in merged.iteritems():
+        if 'lsof_port' not in proc:
+            continue
+        try:
+            record = {}
+            record['argv'] = proc.get('ps_argv', '')
+            record['ip'] = proc['ip']  # Must be present
+            cmd1 = proc.get('ps_argv_zero', '')
+            cmd2 = proc.get('cmd', '')
+            # Use the longest command string, i.e. /usr/sbin/smbd vs smbd
+            command = cmd1 if len(cmd1) > len(cmd2) else cmd2
+            record['cmd'] = command
+            if stats is True:
+                hosts.add(proc['ip'])  # Statistics
+                procnames.append(record['cmd'])
+            record['port'] = proc['lsof_port']  # Must be present
+            record['owner'] = proc.get('username', proc.get('user', ''))
+            listening_procs.append(record)
+        except Exception as err:
+            print('FAIL: unexpected exception (%s)' % (err))
+            raise
+    if stats is True:
+        procname_counter = Counter(procnames)
+        print('Dumping %d listening services from %d unique hosts, %d unique ' % (
+              len(listening_procs), len(hosts), len(set(procnames))) + (
+                  'process names'))
+
+        print
+        print('The 5 most common process names')
+        print('===============================')
+        for procname, occurences in procname_counter.most_common(5):
+            print('%-32s: %d' % (procname, occurences))
+        print
+    dump_json(listening_procs, open(outfile, 'wb'), indent=2)
+
+
+def procjoin(directory):
+    """Load ps data, lsof data, and merge them"""
+    print('-- load and parse stage')
+    ps_parser = PS(directory, 'ps')
+    ps_data = ps_parser.go_paralell()
+    lsof_parser = LSOF(directory, 'lsof')
+    lsof_data = lsof_parser.go_paralell()
+    print('Processed ps data (%d seconds)' % ps_parser.get_time())
+    print('Processed lsof data (%d seconds)' % lsof_parser.get_time())
+    print('-- join stage')
+    joined = join_network_socket_procdata(lsof_data, ps_data)
+    write_socket_procdata(joined)
+    print('DONE (%d records)' % len(joined))
+
+
+def main():
+    """
+        Process the output from taush into a JSON file suitable for database
+        import via an API
+    """
+    parser = ArgumentParser()
+    parser.add_argument(
+        '-d',
+        required=True,
+        dest='input_directory',
+        metavar='<directory>')
+    args = parser.parse_args()
+    procjoin(args.input_directory)
+
+
+if __name__ == '__main__':
+    main()
+    sys.exit(0)

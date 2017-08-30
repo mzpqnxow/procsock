@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 """
     procsock - a tool for parsing and processing lsof and ps data from a large
     collection UNIX based systems
@@ -29,14 +30,20 @@
 
     The data should be collected using procsocksh
 
-    Licensed under GPLv2 by copyright@mpzpqnxow.com
+    Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+    Please see COPYRIGHT for terms
 """
-
+from __future__ import print_function
 from json import dump as dump_json
 import sys
 from argparse import ArgumentParser
 from collections import Counter
 from proclib import LSOF, PS, join_network_socket_procdata
+
+__author__ = "copyright@mzpqnxow.com"
+__copyright__ = "Copyright (C) 2017 copyright@mzpqnxow.com"
+__license__ = "MIT License"
+__version__ = "1.0"
 
 
 def write_socket_procdata(merged, outfile='output.json', stats=True):
@@ -48,7 +55,7 @@ def write_socket_procdata(merged, outfile='output.json', stats=True):
     listening_procs = []
     hosts = set()
     procnames = list()
-    for key, proc in merged.iteritems():
+    for _, proc in merged.iteritems():
         if 'lsof_port' not in proc:
             continue
         try:
@@ -72,15 +79,14 @@ def write_socket_procdata(merged, outfile='output.json', stats=True):
     if stats is True:
         procname_counter = Counter(procnames)
         print('Dumping %d listening services from %d unique hosts, %d unique ' % (
-              len(listening_procs), len(hosts), len(set(procnames))) + (
-                  'process names'))
-
-        print
+            len(listening_procs), len(hosts), len(set(procnames))) + (
+                'process names'))
+        print()
         print('The 5 most common process names')
         print('===============================')
         for procname, occurences in procname_counter.most_common(5):
             print('%-32s: %d' % (procname, occurences))
-        print
+        print()
     dump_json(listening_procs, open(outfile, 'wb'), indent=2)
 
 

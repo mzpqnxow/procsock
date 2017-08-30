@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
+from __future__ import print_function
 from contextlib import contextmanager
 from errno import ENOENT, ENOTEMPTY
 import os
@@ -6,6 +8,14 @@ import pwd
 from shutil import copy, rmtree
 import subprocess as sp
 from time import sleep
+"""
+Build a Python virtual environment without setuptools, virtualenv and
+other dependencies. Useful when building on "fresh" systems or those
+which for some reason do not have the required dependencies available
+
+Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+Please see COPYRIGHT for terms
+"""
 
 # Basic required directories for a virtualenv
 VENV_DIRS = set(['lib', 'bin', 'include'])
@@ -17,8 +27,9 @@ PKG_REQUIREMENT_FILEPATHS = set(['requirements.txt',
 # By default, use the 'system python'
 DEFAULT_VENV_BASE_PYTHON = '/usr/bin/python'
 
+
 def basic_env(cwd):
-    """ Set environment """
+    """ Provide a clean environment with bare essentials """
     pent = pwd.getpwuid(os.getuid())
     env = dict()
     env['PYTHONPATH'] = '%s/packages/lib/python2.6/site-packages/' % cwd
@@ -35,7 +46,8 @@ def basic_env(cwd):
 
 @contextmanager
 def pushd(directory):
-    cwd = os.getcwd()  # saved
+    """ Emulate Bash pushd/popd """
+    cwd = os.getcwd()
     try:
         os.chdir(directory)
     except OSError as err:
@@ -44,11 +56,12 @@ def pushd(directory):
         else:
             raise err
     yield
-    os.chdir(cwd)  # popd
+    os.chdir(cwd)
 
 
 def destroy(explain, vdirs, cfg):
-    print '%s: destroying %s' % (explain, ('/ '.join(vdirs) + '/'))
+    """ Destroy a previously created virtual environment """
+    print('%s: destroying %s' % (explain, ('/ '.join(vdirs) + '/')))
     # rmtree can fail if there are stale .nfs files
     # so put it in a loop
     retry = 10  # don't try forever
@@ -66,10 +79,10 @@ def destroy(explain, vdirs, cfg):
                 else:
                     raise err  # re-raise something is wrong.
         if not done:
-            # Filesystem syncing (NFS?)
+            # NFS or some filesystem locking issue
             sleep(2)
 
-    print '%s: destroying %s' % (explain, (' '.join(cfg)))
+    print('%s: destroying %s' % (explain, (' '.join(cfg))))
     for cfgfile in cfg:
         try:
             os.unlink(cfgfile)
@@ -104,16 +117,18 @@ def pip(pip_exe, ini, require, cwd):
         if os.path.exists(req):
             break
     else:
-        print 'WARNING: none of %s exist, skipping pip' % (str(require))
+        print('WARNING: none of %s exist, skipping pip' % (str(require)))
         return
-
+    # Use -I to ensure prepackaged dependencies are installed if specified in
+    # requirements.txt. Otherwise they are detected in the packages directory
+    # and not installed at all, requiring manually adding with pip after the
+    # venv is built
     sp.check_call([pip_exe, 'install', '--pre', '-I', '-r', req], env=basic_env(cwd))
 
 
 def main(argc, argv):
-    # Compatible with 2.6.x and 2.7.x so stuck with OptionParser
+    # For 2.[67] compatibility
     from optparse import OptionParser
-
     optparser = OptionParser('usage: %prog [options] <destination>')
 
     optparser.add_option('-p',
@@ -123,13 +138,11 @@ def main(argc, argv):
                          dest='python',
                          default=DEFAULT_VENV_BASE_PYTHON,
                          help='specify the full path to python')
-
     optparser.add_option('-d', '--destroy',
                          action='store_true',
                          dest='destroy',
                          default=False,
                          help='Destroy a venv')
-
     optparser.add_option('-i',
                          '--ini',
                          action='store',
@@ -164,7 +177,7 @@ def main(argc, argv):
                 if any(files_exist):
                     destroy('incomplete virtualenv detected', VENV_DIRS, INI_FILES)
                 else:
-                    print 'no virtual env detected'
+                    print('no virtual env detected')
                 invoke_virtualenv(virtualenv_run_path,
                                   args.python,
                                   ini_load_path,

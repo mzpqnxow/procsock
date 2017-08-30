@@ -1,12 +1,20 @@
-from common import ProcToolWorker
+# -*- coding: utf-8 -*-
+""" PS class, a parallelized class for processing ps output into a dict
+
+Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+Please see COPYRIGHT for terms
+"""
+from __future__ import print_function
+from proclib.worker import ProcToolWorker
 
 
 class PS(ProcToolWorker):
-    """
-        A parallellized ps output parser
+    """ Parse ps output into dictionaries
 
         Input:
-            Path to ps results files
+            Output of `ps -e -o pid= -o user= -o comm= -o args=` in files
+            This data is produced by procsocksh and must be formatted and
+            named in a certain way
 
         Output:
             A dictionary with key (ip, pid) containing process information for
@@ -65,7 +73,7 @@ class PS(ProcToolWorker):
                     if split[1] in known_nonconformant:
                         continue
                     else:
-                        print split
+                        print(split)
                         raise Exception('Bad ps line !!')
 
                 pid = int(split[0])

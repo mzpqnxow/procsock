@@ -1,4 +1,14 @@
 #!/bin/bash
+#
+# Given passwordless SSH private key trust, iterate over a list of hosts
+# and pull lsof and ps data in a format compatible with procsock. Note
+# that the file and directory naming convention is also an important part
+# of how procsock processes this data. Do NOT rename the files. You may
+# rename only the top level directory
+#
+# Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+# Please see COPYRIGHT for terms
+#
 INFILE=iplist.txt
 SOURCE_HOST=$(/bin/hostname)
 DATE=$(/bin/date +%Y%m%d%H%M)
@@ -12,9 +22,11 @@ mkdir -p "${OUTDIR}" || exit
 LSOF_CMD="PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin/:/usr/local/sbin lsof +c 0 -i4 -P -n -Fn -Fp -FT -F0"
 PS_CMD="PATH=/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin/:/usr/local/sbin ps -e -o pid= -o user= -o comm= -o args="
 
+# Be extra cautious, perform a regex to ensure the input looks like a valid IP address
 for IP in $(/bin/egrep -e '^[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}\.[[:digit:]]{1,3}$' "${INFILE}")
 do
 	echo "-- ${IP}"
+	# The output files are used by procsock to determine if/how certain hosts failed
 	LSOF_OUT="${OUTDIR}/${IP}.${DATE}.lsof"
 	PS_OUT="${OUTDIR}/${IP}.${DATE}.ps"
 	RET_ERR_OUT="${OUTDIR}/${IP}.${DATE}.ret.error"
@@ -22,24 +34,25 @@ do
 	LSOF_ERR_OUT="${OUTDIR}/${IP}.${DATE}.lsof.error"
 	RET_SUCCESS_OUT="${OUTDIR}/${IP}.${DATE}.ret.complete"
 	echo "ps on ${IP}..."
-        # GSSAPIAuthentication=no
-	ssh -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${PS_CMD}" 2>>"${PS_ERR_OUT}" 1>"${PS_OUT}"
-    	o=$?
+	# If using an old OpenSSH version, some of these options may throw an error due to not yet implemented
+	# Remove individually as appropriate. Just make sure there will not be a password prompt or this will
+	# not run unattended
+	ssh -o GSSAPIAuthentication=no -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${PS_CMD}" 2>>"${PS_ERR_OUT}" 1>"${PS_OUT}"
+    o=$?
 	if [ $o -ne 0 ]; then
 		echo "$o:${IP}" >> "${RET_ERR_OUT}"
 		echo "SSH returned error trying ps on ${IP}, skipping lsof"
 		continue
 	else
 		echo "lsof on ${IP}..."
-                # GSSAPIAuthentication=no
-		ssh -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${LSOF_CMD}" 2>>"${LSOF_ERR_OUT}" 1>"${LSOF_OUT}"
+		ssh -o GSSAPIAuthentication=no -o StrictHostKeyChecking=no -o ForwardX11=no -o ConnectionAttempts="${CONNECTION_ATTEMPTS}" -o ChallengeResponseAuthentication=no -o PasswordAuthentication=no -o ConnectTimeout="${CONNECTION_TIMEOUT}" -o PreferredAuthentications=publickey -o UserKnownHostsFile=/dev/null root@"${IP}" "${LSOF_CMD}" 2>>"${LSOF_ERR_OUT}" 1>"${LSOF_OUT}"
 		o=$?
 		if [ $o -ne 0 ]; then
 			echo "$o:${IP}" >> "${RET_ERR_OUT}"
 			echo "SSH returned error trying lsof on ${IP}"
 		else
+				# Signal success to procsock
 		    	touch "${RET_SUCCESS_OUT}"
 		fi
 	fi
-
 done

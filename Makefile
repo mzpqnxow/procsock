@@ -1,7 +1,9 @@
 #
-# Boilerplate pyboot venv build/clean/rebuild Makefile
+# Use pybuild to create a venv w/o dependencies
 #
-# If you have dependencies for your venv:
+# If you have dependencies for your venv you want available
+# you can set them using requirements.txt
+#
 # $ mkdir venv; cat > venv/requirements.txt << 'EOF'
 # pep8
 # pyflakes
@@ -11,11 +13,13 @@
 # $ source venv/bin/activate
 # $ ...
 #
-
+# Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+# Please see COPYRIGHT for terms
+#
 PYTHON = /usr/bin/python
 VENV_DIR = venv
 RM_RF := /bin/rm -rf
-PYBOOT := ./pyboot
+PYBOOT := ./pybuild
 VENV_FILES := $(VENV_DIR)/lib64 $(VENV_DIR)/bin $(VENV_DIR)/lib
 
 all: $(VENV_DIR)

@@ -15,7 +15,7 @@ The data retrieved is processed later by procksock
 
 ### procsock
 
-The procksock tool is written in Python and contains logic to join up the lsof and ps data such that given an IP and port, the user can quickly identify exactly what executable is running. For stability, you should use a virtual environment. One is built for you if you run make.
+The procksock tool is written in Python and contains logic to join up the lsof and ps data such that given an IP and port, the user can quickly identify exactly what executable is running. For stability, you should use a Python virtual environment. One is built for you if you run make.
 
 ```
 $ make
@@ -37,8 +37,9 @@ This data is meant to be ingested into a database, alongside port scan data. It 
 
 ## Author
 
-copyright@mzpqnxow
+copyright [at] mzpqnxow.com
 
 ## License
 
-This is available under the GPLv2 license
+Copyright (C) 2017 copyright@mzpqnxow.com under the MIT license
+Please see COPYRIGHT for terms

@@ -1,5 +1,12 @@
-from common import ProcToolWorker
+# -*- coding: utf-8 -*-
+""" LSOF class, a parallelized class for processing lsof output into a dict
+
+Copyright (C) 2017 copyright /at/ mzpqnxow.com under the MIT license
+Please see COPYRIGHT for terms
+"""
+from __future__ import print_function
 from collections import defaultdict
+from proclib.worker import ProcToolWorker
 
 
 class LSOF(ProcToolWorker):
@@ -7,7 +14,8 @@ class LSOF(ProcToolWorker):
         A parallellized lsof output parser
 
         Input:
-            Path to lsof results files
+            Path to lsof results files. This data is produced by procsocksh
+            and must be formatted and named in a certain way
 
         Output:
             A dictionary with key (ip, pid) containing process information for
@@ -27,8 +35,7 @@ class LSOF(ProcToolWorker):
             results_path, cmd, extension=extension)
 
     def load(self, completed, queue):
-        """ Parse lsof -F0 file lines into dictionaries and populate class
-            lsof_records dictionary, key is (ip,port) tuple
+        """ Parse lsof -F0 output into dictionaries
 
         Input:
                Output of 'lsof +c 0 -i4 -P -n -Fn -Fp -FT -F0' in files
@@ -71,7 +78,7 @@ class LSOF(ProcToolWorker):
         listen_record = defaultdict(list)
         counter = 0
 
-        for filename, ip in completed:
+        for filename, ip_addr in completed:
             counter += 1
             for line in [l.strip() for l in open(filename + '.%s' % (self._cmd), 'r').readlines()]:
                 split = line.split('\0')
@@ -83,17 +90,21 @@ class LSOF(ProcToolWorker):
                     # ['p12345','g12345','R5432','ctelnetd', 'u0', 'Lroot','']
                     pid = int(fields['p'])
                     # These edge cases need to be handled when going over a
-                    # large dataset containing data from different operating
+                    # large dataset containing output from different operating
                     # systems and versions because anomalies will occur,
                     # including things like 'randomly' split lines. Split lines
                     # make the parser think that a mandatory field is missing.
                     # So for integers, fill in -1, for strings, fill in ''
                     #
+                    # This is a best effort at recovering from a corrupt file
+                    # as opposed to ignoring its contents
+                    #
                     # There is an obvious choice between catching a KeyError
                     # and using the get method. Because the exceptions will
                     # never be raised, it is better to use them rather than
-                    # call the get method so many times.. at least this is what
-                    # I read, I haven't actually profiled it.
+                    # call the get method so many times.. in theory, but I
+                    # haven't profiled it. Performance should be fine in
+                    # parallel anyway
                     try:
                         pgid = int(fields['g'])
                     except KeyError as err:
@@ -121,6 +132,7 @@ class LSOF(ProcToolWorker):
                     listening += 1
                     interface = fields['n']
                     if '::' in interface:
+                        # Count IPv6 sockets but otherwise ignore them
                         ip6_socket_count += 1
                         continue
                     interface, port = interface.split(':')
@@ -129,7 +141,7 @@ class LSOF(ProcToolWorker):
                         continue
                     port = int(port)
                     current = {}
-                    current['ip'] = ip
+                    current['ip'] = ip_addr
                     current['lsof_port'] = port
                     current['interface'] = interface
                     current['username'] = username
@@ -137,5 +149,5 @@ class LSOF(ProcToolWorker):
                     current['cmd'] = cmd
                     current['pid'] = pid
                     current['pgid'] = pgid
-                    listen_record[(ip, pid)].append(current)
+                    listen_record[(ip_addr, pid)].append(current)
         queue.put(listen_record)
